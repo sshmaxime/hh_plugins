@@ -1,6 +1,6 @@
 {
   "name": "hardhat-ts-plugin-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Hardhat TypeScript plugin boilerplate",
   "repository": "github:sshmaxime/hardhat-ts-plugin-boilerplate",
   "author": "Maxime Aubanel",
@@ -17,7 +17,7 @@
     "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
     "lint": "tslint --config tslint.json --project tsconfig.json",
     "test": "mocha --exit --recursive 'test/**/*.test.ts'",
-    "build": "tsc",
+    "build": "tsc && cp -r src/engine/examples/* dist/src/engine/examples/ && cp -r src/tasks/* dist/src/tasks/",
     "watch": "tsc -w",
     "prepublishOnly": "npm run build"
   },
