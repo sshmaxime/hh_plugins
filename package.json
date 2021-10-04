@@ -1,6 +1,6 @@
 {
   "name": "hardhat-migration",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Hardhat TypeScript plugin for migration",
   "repository": "github:sshmaxime/hardhat-migration",
   "author": "Maxime Aubanel",
