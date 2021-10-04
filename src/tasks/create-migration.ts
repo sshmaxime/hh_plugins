@@ -2,11 +2,13 @@ import { createMigrationTaskArgs } from ".";
 import fs from "fs";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import path from "path";
-import { MIGRATION_FILES_DIR } from "../config";
+import { MIGRATION_FILES_DIR } from "../engine/config";
 
 const SAMPLE_MIGRATION_PATH = path.resolve(
   __dirname,
-  "../examples/0_deploy_my_token.ts"
+  process.env.DEV
+    ? "../examples/0_deploy_my_token.test.ts"
+    : "../examples/0_deploy_my_token.ts"
 );
 
 export default async (

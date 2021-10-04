@@ -9,8 +9,9 @@
     "strict": true,
     "rootDirs": ["./src", "./test"],
     "esModuleInterop": true,
-    "useUnknownInCatchVariables": false // override strict's default
+    "useUnknownInCatchVariables": false,
+    "noImplicitAny": false
   },
-  "exclude": ["dist", "node_modules"],
-  "include": ["./test", "./src"]
+  "include": ["./test", "./src"],
+  "exclude": ["dist", "node_modules"]
 }

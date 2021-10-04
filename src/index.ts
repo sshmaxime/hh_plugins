@@ -8,7 +8,7 @@ import { resolveConfig } from "hardhat/internal/core/config/config-resolution";
 // extensions in your npm package's types file.
 import "./type-extensions";
 
-import "./engine/tasks";
+import "./tasks";
 
 import { loadMigrationNetworkConfig } from "./setup";
 
