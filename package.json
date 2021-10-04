@@ -1,9 +1,9 @@
 {
   "name": "hardhat-ts-plugin-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hardhat TypeScript plugin boilerplate",
-  "repository": "github:nomiclabs/hardhat-ts-plugin-boilerplate",
-  "author": "Nomic Labs LLC",
+  "repository": "github:sshmaxime/hardhat-ts-plugin-boilerplate",
+  "author": "Maxime Aubanel",
   "license": "MIT",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
