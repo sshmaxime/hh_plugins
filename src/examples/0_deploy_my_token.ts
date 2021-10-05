@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
-import { engine } from "hh_migration";
-import { deployedContract, Migration } from "../engine/types";
+import { engine } from "hardhat-migration";
+import { Migration } from "hardhat-migration/types";
 import { utils } from "ethers";
 
 const { signer } = engine;
-const { deploy, execute } = engine.executionFunctions;
+const { deploy, execute } = engine.functions;
+// TODO: get your contracts here and initialize them with the engine signer
+// const contracts = getContracts(signer);
 
 export type InitialState = unknown;
 

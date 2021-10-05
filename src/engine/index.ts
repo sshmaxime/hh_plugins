@@ -1,49 +1,29 @@
-import { Engine } from "./Engine";
-import { defaultArgs } from "./Types";
-import { Signer } from "@ethersproject/abstract-signer";
-import { LedgerSigner } from "@ethersproject/hardware-wallets";
-import { ethers } from "hardhat";
+import { Engine } from "./core/engine";
+import { defaultMigrationArgs } from "./core/types";
 import { HardhatRuntimeEnvironment as hre } from "hardhat/types";
+import { LedgerSigner } from "@ethersproject/hardware-wallets";
+import { Wallet } from "@ethersproject/wallet";
 
 export let engine: Engine;
 
-// extra config
-export let test = false;
-
-const initSigner = async (args: defaultArgs) => {
-  const signer = args.ledger
-    ? new LedgerSigner(ethers.provider, "hid", args.ledgerPath)
-    : (await ethers.getSigners())[0];
-
-  if (!signer) {
-    throw new Error("Signer must be defined");
-  }
-
-  const signerAddress = await signer.getAddress();
-
-  return { signer, signerAddress };
-};
-
-export const initEngine = async (
-  args: defaultArgs,
-  hre: hre,
-  signer: Signer,
-  signerAddress: string,
-  isTest: boolean
-) => {
-  test = isTest;
-  engine = new Engine(hre, args, signer, signerAddress);
-};
-
 export default async (
-  args: defaultArgs,
+  args: defaultMigrationArgs,
   hre: hre,
   task: (a: any, b: hre) => any
 ) => {
-  const { signer, signerAddress } = await initSigner(args);
+  const signer = args.ledger
+    ? new LedgerSigner(hre.ethers.provider, "hid", args.ledgerPath)
+    : new Wallet(hre.config.migration.defaultSigner, hre.ethers.provider);
+  const address = await signer.getAddress();
 
-  await initEngine(args, hre, signer, signerAddress, false);
+  engine = new Engine(
+    { signer, address },
+    hre.config.migration,
+    hre.config.paths.root,
+    hre.network.name,
+    args
+  );
 
-  // now that engine is initialized, go to the actual task
-  return task(args, hre);
+  // go to actual task
+  await task(args, hre);
 };

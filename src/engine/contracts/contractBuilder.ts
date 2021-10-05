@@ -21,3 +21,9 @@ export interface ContractBuilder<F extends ContractFactory> {
   deploy(...args: Parameters<F["deploy"]>): Promise<Contract<F>>;
   attach(address: string, signer?: Signer): Promise<Contract<F>>;
 }
+
+export type FactoryConstructor<F extends ContractFactory> = {
+  new (signer?: Signer): F;
+  abi: unknown;
+  bytecode: string;
+};

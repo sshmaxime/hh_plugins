@@ -1,7 +1,4 @@
 // tslint:disable-next-line no-implicit-dependencies
-import { assert } from "chai";
-import path from "path";
-
 import { useEnvironment } from "./helpers";
 
 describe("Integration tests examples", function () {
@@ -11,6 +8,7 @@ describe("Integration tests examples", function () {
   before(function () {
     env = process.env;
     process.env["MIGRATION"] = "1";
+    process.env["DEV"] = "1";
   });
 
   // restoring everything back
@@ -25,8 +23,6 @@ describe("Integration tests examples", function () {
       await this.hre.run("migrate", {
         reset: true,
       });
-
-      console.log(this.hre.config.migration);
     });
   });
 });

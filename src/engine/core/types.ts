@@ -47,9 +47,7 @@ export type NetworkSettings = {
   originalNetwork: string;
 };
 
-export type defaultArgs = {
-  reset: boolean;
-
+export type defaultMigrationArgs = {
   // ledger
   ledger: boolean;
   ledgerPath: string;

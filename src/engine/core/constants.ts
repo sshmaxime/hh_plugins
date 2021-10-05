@@ -8,7 +8,7 @@ export const MIGRATION_DEPLOYMENTS_DIR = "deployments";
 export const MIGRATION_HISTORY_FILE_NAME = "history.json";
 export const MIGRATION_STATE_FILE_NAME = "state.json";
 
-export const defaultMigration: {
+export const defaultEngineState: {
   state: SystemState;
   deployment: SystemDeployments;
   migrationsData: MigrationData[];

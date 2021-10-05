@@ -2,7 +2,7 @@ import { createMigrationTaskArgs } from ".";
 import fs from "fs";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import path from "path";
-import { MIGRATION_FILES_DIR } from "../engine/config";
+import { MIGRATION_FILES_DIR } from "../engine/core/constants";
 
 const SAMPLE_MIGRATION_PATH = path.resolve(
   __dirname,

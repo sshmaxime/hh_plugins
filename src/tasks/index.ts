@@ -1,7 +1,9 @@
-import { basicTaskLoader, migrationLoader } from "./engine/loaders";
+import { basicTaskLoader, migrationLoader } from "../engine/core/loaders";
 import { task, types } from "hardhat/config";
 import path from "path";
+import { defaultMigrationArgs } from "../engine/core/types";
 
+// create-migration
 export type createMigrationTaskArgs = {
   wordList: string[];
 };
@@ -9,21 +11,13 @@ export type createMigrationTaskArgs = {
 const CREATE_MIGRATION_SCRIPT = "create-migration";
 task("create-migration", "Create a migration file")
   .addVariadicPositionalParam("wordList", "Name of the migration")
-  .setAction(
-    basicTaskLoader(path.join(__dirname, "tasks", CREATE_MIGRATION_SCRIPT))
-  );
+  .setAction(basicTaskLoader(path.join(__dirname, CREATE_MIGRATION_SCRIPT)));
 
 export type migrateParamTaskArgs = {
   reset: boolean;
+} & defaultMigrationArgs;
 
-  // ledger
-  ledger: boolean;
-  ledgerPath: string;
-
-  // execution settings
-  gasPrice: number;
-  minBlockConfirmations: number;
-};
+// migrate
 const MIGRATE_SCRIPT = "migrate";
 task("migrate", "Migrate the network")
   .addFlag("reset", "Reset the migration data")
@@ -36,4 +30,4 @@ task("migrate", "Migrate the network")
     1,
     types.int
   )
-  .setAction(migrationLoader(path.join(__dirname, "tasks", MIGRATE_SCRIPT)));
+  .setAction(migrationLoader(path.join(__dirname, MIGRATE_SCRIPT)));

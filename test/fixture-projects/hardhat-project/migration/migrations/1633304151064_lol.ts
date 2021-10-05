@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
 import { engine } from "../../../../../src/engine";
-import { deployedContract, Migration } from "../../../../../src/engine/types";
+import { Migration } from "../../../../engine/core/types";
 import { utils } from "ethers";
+import { getContracts } from "../../Contracts";
 
 const { signer } = engine;
-const { deploy, execute } = engine.executionFunctions;
+const { deploy, execute } = engine.functions;
+const contracts = getContracts(signer);
 
 export type InitialState = unknown;
 

@@ -2,7 +2,6 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import path from "path";
 
 export const importCsjOrEsModule = (filePath: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const imported = require(filePath);
   return imported.default || imported;
 };
@@ -20,8 +19,10 @@ export const basicTaskLoader = (pathToAction: string) => {
 
 export const migrationLoader = (pathToAction: string) => {
   return (taskArgs: any, hre: any) => {
-    const loader = importCsjOrEsModule(path.join(__dirname, "index.ts"));
+    const migrationTask = importCsjOrEsModule(
+      path.join(__dirname, "..", process.env.DEV ? "index.ts" : "index.js")
+    );
 
-    return loader(taskArgs, hre, basicTaskLoader(pathToAction));
+    return migrationTask(taskArgs, hre, basicTaskLoader(pathToAction));
   };
 };

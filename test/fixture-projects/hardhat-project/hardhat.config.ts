@@ -2,6 +2,7 @@
 import { HardhatUserConfig } from "hardhat/types";
 
 import "../../../src/index";
+import "@typechain/hardhat";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.0",
@@ -13,10 +14,10 @@ const config: HardhatUserConfig = {
         accountsBalance: "10000000000000000000000000000",
       },
     },
-  },
-
-  migration: {
-    dir: "migration",
+    mainnet: {
+      url:
+        "https://eth-mainnet.alchemyapi.io/v2/***REMOVED***",
+    },
   },
 };
 

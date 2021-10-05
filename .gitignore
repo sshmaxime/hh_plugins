@@ -9,9 +9,9 @@ yarn-error.log*
 
 /dist
 
-/cache
-/artifacts
-/typechain
+*/**/cache
+*/**/artifacts
+*/**/typechain
 /data
 
 .coverage_artifacts
@@ -26,9 +26,9 @@ contracts/hardhat-dependency-compiler
 
 config.json
 
-migration/data/hardhat
-migration/data/localhost
-migration/data/fork*
+/test/fixture-projects/hardhat-project/migration/data/hardhat
+/test/fixture-projects/hardhat-project/migration/data/localhost
+/test/fixture-projects/hardhat-project/migration/data/fork*
 
 migration/test/migration/data/hardhat
 migration/test/migration/data/localhost

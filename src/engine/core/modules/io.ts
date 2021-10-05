@@ -2,18 +2,19 @@ import {
   MIGRATION_HISTORY_FILE_NAME,
   MIGRATION_STATE_FILE_NAME,
   MIGRATION_DEPLOYMENTS_DIR,
-} from "./config";
-import { Engine } from "./engine";
+} from "../constants";
 import {
   Deployment,
   History,
   HistoryExecution,
   SystemDeployments,
   SystemState,
-} from "./Types";
+} from "../types";
 import { BigNumber } from "ethers";
 import fs from "fs";
 import path from "path";
+
+export let io: Io;
 
 const replacer = (_: any, value: any) => {
   const { type, hex } = value;
@@ -24,12 +25,16 @@ const replacer = (_: any, value: any) => {
   return value;
 };
 
-export const initIO = (engine: Engine) => {
-  return {
-    state: {
-      write: (state: SystemState) => {
+export class Io {
+  state;
+  history;
+  deployment;
+
+  constructor() {
+    this.state = {
+      write: (state: SystemState, pathToNetworkDir: string) => {
         fs.writeFileSync(
-          path.join(engine.pathToNetworkDir, MIGRATION_STATE_FILE_NAME),
+          path.join(pathToNetworkDir, MIGRATION_STATE_FILE_NAME),
           JSON.stringify(state, replacer, 4) + `\n`
         );
 
@@ -44,40 +49,44 @@ export const initIO = (engine: Engine) => {
           )
         ) as SystemState;
       },
-    },
+    };
 
-    history: {
-      write: (history: History) => {
+    this.history = {
+      write: (history: History, pathToNetworkDir: string) => {
         fs.writeFileSync(
-          path.join(engine.pathToNetworkDir, MIGRATION_HISTORY_FILE_NAME),
+          path.join(pathToNetworkDir, MIGRATION_HISTORY_FILE_NAME),
           JSON.stringify(history, replacer, 4) + `\n`
         );
         return history;
       },
-      writeOne: (historyExecution: HistoryExecution) => {
+      writeOne: (
+        historyExecution: HistoryExecution,
+        pathToNetworkDir: string,
+        currentMigrationDataFilename: string
+      ) => {
         const migrationHistoryFileName = MIGRATION_HISTORY_FILE_NAME;
 
         // find the history file in the network directory
-        const pathToNetworkDirFiles = fs.readdirSync(engine.pathToNetworkDir);
+        const pathToNetworkDirFiles = fs.readdirSync(pathToNetworkDir);
         const pathToMigrationDeploymentFile = pathToNetworkDirFiles.find(
           (f: string) => f === migrationHistoryFileName
         );
 
         // if file not found create an empty one
         if (!pathToMigrationDeploymentFile) {
-          engine.IO.history.write({});
+          this.history.write({}, pathToNetworkDir);
         }
 
-        const currentHistory = engine.IO.history.fetch(engine.pathToNetworkDir);
-        if (!currentHistory[engine.migration.currentMigrationData.fileName]) {
-          currentHistory[engine.migration.currentMigrationData.fileName] = {
+        const currentHistory = this.history.fetch(pathToNetworkDir);
+        if (!currentHistory[currentMigrationDataFilename]) {
+          currentHistory[currentMigrationDataFilename] = {
             executions: [],
           };
         }
-        currentHistory[
-          engine.migration.currentMigrationData.fileName
-        ].executions.push(historyExecution);
-        engine.IO.history.write(currentHistory);
+        currentHistory[currentMigrationDataFilename].executions.push(
+          historyExecution
+        );
+        this.history.write(currentHistory, pathToNetworkDir);
       },
       fetch: (pathToHistory: string) => {
         return JSON.parse(
@@ -87,8 +96,9 @@ export const initIO = (engine: Engine) => {
           )
         ) as History;
       },
-    },
-    deployment: {
+    };
+
+    this.deployment = {
       write: (pathToWrite: string, deployments: SystemDeployments) => {
         fs.writeFileSync(
           pathToWrite,
@@ -97,13 +107,17 @@ export const initIO = (engine: Engine) => {
 
         return deployments;
       },
-      writeOne: (deployment: Deployment) => {
+      writeOne: (
+        deployment: Deployment,
+        pathToNetworkDir: string,
+        currentMigrationDataFileName: string
+      ) => {
         const currentMigrationDeploymentFileName =
-          engine.migration.currentMigrationData.fileName + ".json";
+          currentMigrationDataFileName + ".json";
 
         // find the migration file in the network deployments directory
         const pathToNetworkMigrationDeploymentDir = path.join(
-          engine.pathToNetworkDir,
+          pathToNetworkDir,
           MIGRATION_DEPLOYMENTS_DIR
         );
 
@@ -122,17 +136,17 @@ export const initIO = (engine: Engine) => {
 
         // if file not found create an empty one
         if (!pathToMigrationDeploymentFile) {
-          engine.IO.deployment.write(pathToNetworkMigrationDeploymentFile, {});
+          this.deployment.write(pathToNetworkMigrationDeploymentFile, {});
         }
 
-        const currentDeployments = engine.IO.deployment.fetch(
+        const currentDeployments = this.deployment.fetch(
           path.join(pathToNetworkMigrationDeploymentFile)
         );
 
         // if the metadata of the current contract is not already stored, store it
         if (!currentDeployments[deployment.contractName]) {
           currentDeployments[deployment.contractName] = deployment;
-          engine.IO.deployment.write(
+          this.deployment.write(
             pathToNetworkMigrationDeploymentFile,
             currentDeployments
           );
@@ -143,6 +157,10 @@ export const initIO = (engine: Engine) => {
           fs.readFileSync(pathToDeployments, "utf-8")
         ) as SystemDeployments;
       },
-    },
-  };
+    };
+  }
+}
+
+export const initIo = () => {
+  io = new Io();
 };
