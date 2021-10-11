@@ -1,9 +1,6 @@
-import {
-    MIGRATION_DEPLOYMENTS_DIR,
-    MIGRATION_STATE_FILE_NAME,
-} from "./constants";
-import fs from "fs-extra";
-import path from "path";
+import { MIGRATION_DEPLOYMENTS_DIR, MIGRATION_STATE_FILE_NAME } from './constants';
+import fs from 'fs-extra';
+import path from 'path';
 
 export const isMigrationDirValid = (dir: string) =>
     fs.existsSync(dir) &&

@@ -1,4 +1,3 @@
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { migrateParamTaskArgs } from '.';
 import { engine } from '../engine/bootloader';
 

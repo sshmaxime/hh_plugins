@@ -1,4 +1,3 @@
-import { Signer } from '@ethersproject/abstract-signer';
 import { HttpNetworkConfig, NetworksUserConfig } from 'hardhat/types';
 import { MigrationUserConfig } from './type-extensions';
 

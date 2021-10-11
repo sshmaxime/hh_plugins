@@ -3,7 +3,7 @@ import { ContractFactory } from '@ethersproject/contracts';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ContractBuilder, Contract, FactoryConstructor } from '../../engine/contracts/contractBuilder';
 
-export type contracts = {
+type contracts = {
     [contractName: string]:
         | ReturnType<ReturnType<typeof initDeployOrAttach>['deployOrAttach']>
         | ReturnType<ReturnType<typeof initDeployOrAttach>['attachOnly']>;
@@ -13,22 +13,14 @@ export type contractsWithConnect = {
     connect: (signer: Signer) => contractsWithConnect;
 } & contracts;
 
-export type contractsFunction = (signer?: Signer) => contracts;
-export const getContracts = <F extends contractsFunction>(funct: F) => {
-    const contracts = funct();
-
+export const getContracts = <F extends { (signer?: Signer): contracts }>(funct: F) => {
     return {
         connect: (signer: Signer) => funct(signer),
-
-        ...contracts
+        ...funct()
     } as ReturnType<F> & contractsWithConnect;
 };
 
-type ethersPlaceholder = {
-    getSigners(): Promise<SignerWithAddress[]>;
-};
-
-export const initDeployOrAttach = (ethers: ethersPlaceholder) => {
+export const initDeployOrAttach = (ethers: { getSigners(): Promise<SignerWithAddress[]> }) => {
     const attachOnly = <F extends ContractFactory>(
         FactoryConstructor: FactoryConstructor<F>,
         initialSigner?: Signer
@@ -43,8 +35,6 @@ export const initDeployOrAttach = (ethers: ethersPlaceholder) => {
 
     const deployOrAttach = <F extends ContractFactory>(
         contractName: string,
-        // @TODO: needs to replace with correctly typed params but it doesn't
-        // work properly for some reason https://github.com/microsoft/TypeScript/issues/31278
         FactoryConstructor: FactoryConstructor<F>,
         initialSigner?: Signer
     ): ContractBuilder<F> => {
