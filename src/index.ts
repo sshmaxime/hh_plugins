@@ -1,18 +1,14 @@
 // include your type extensions in npm package's types file
-import "./type-extensions";
+import './type-extensions';
 
 // extend capabilities
-import "./extend.ts";
+import './extend.ts';
 
 // import tasks
-import "./tasks";
+import './tasks';
 
 // exports
-import { engine } from "./engine";
-import {
-  Migration,
-  deployedContract,
-  deployedProxy,
-} from "./engine/core/types";
+import { engine } from './engine/bootloader';
+import { IMigration, deployedContract, deployedProxy } from './engine/types/types';
 
-export { engine, Migration, deployedContract, deployedProxy };
+export { engine, IMigration, deployedContract, deployedProxy };

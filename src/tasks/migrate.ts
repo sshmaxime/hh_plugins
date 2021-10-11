@@ -1,11 +1,13 @@
-import { migrateParamTaskArgs } from ".";
-import { engine } from "../engine";
-import { core } from "../engine/core/modules/core";
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { migrateParamTaskArgs } from '.';
+import { engine } from '../engine/bootloader';
 
 export default async (args: migrateParamTaskArgs) => {
-  if (args.reset) {
-    core.reset();
-  }
+    const { reset, migrate } = engine.getCommands();
 
-  await engine.migrate();
+    if (args.reset) {
+        reset();
+    }
+
+    await migrate();
 };
