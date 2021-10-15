@@ -62,22 +62,36 @@ export class Engine {
         };
     };
 
-    get = () => {
+    get<F extends contractsWithConnect>(
+        Contracts: F
+    ): {
+        signer: Signer;
+        signerAddress: string;
+        functions: ExecutionsFunctions;
+        contracts: F;
+    };
+    get(): {
+        signer: Signer;
+        signerAddress: string;
+        functions: ExecutionsFunctions;
+    };
+
+    get<F extends contractsWithConnect>(Contracts?: F) {
+        if (Contracts) {
+            const contracts = Contracts.connect(this.signer) as F;
+
+            return {
+                signer: this.signer,
+                signerAddress: this.signerAddress,
+                functions: this.modules.execution.functions,
+                contracts: contracts
+            };
+        }
+
         return {
             signer: this.signer,
             signerAddress: this.signerAddress,
             functions: this.modules.execution.functions
         };
-    };
-
-    getWithContracts = <F extends contractsWithConnect>(Contracts: F) => {
-        const contracts = Contracts.connect(this.signer) as F;
-
-        return {
-            signer: this.signer,
-            signerAddress: this.signerAddress,
-            functions: this.modules.execution.functions,
-            contracts: contracts
-        };
-    };
+    }
 }

@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
-import { engine } from '../../../../engine/bootloader';
-import { IMigration } from '../../../../engine/types/types';
+import { engine } from '../../../../../src/engine/bootloader';
+import { IMigration } from '../../../../../src/engine/types/types';
 import Contracts from '../../contracts';
 
 const {
     signer,
     functions: { deploy, execute, deployProxy, upgradeProxy },
     contracts
-} = engine.getWithContracts(Contracts);
+} = engine.get(Contracts);
 
 export type InitialState = unknown;
 
