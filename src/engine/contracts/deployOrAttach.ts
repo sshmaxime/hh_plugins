@@ -3,23 +3,6 @@ import { ContractFactory } from '@ethersproject/contracts';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ContractBuilder, Contract, FactoryConstructor } from '../../engine/contracts/contractBuilder';
 
-type contracts = {
-    [contractName: string]:
-        | ReturnType<ReturnType<typeof initDeployOrAttach>['deployOrAttach']>
-        | ReturnType<ReturnType<typeof initDeployOrAttach>['attachOnly']>;
-};
-
-export type contractsWithConnect = {
-    connect: (signer: Signer) => contractsWithConnect;
-} & contracts;
-
-export const getContracts = <F extends { (signer?: Signer): contracts }>(funct: F) => {
-    return {
-        connect: (signer: Signer) => funct(signer),
-        ...funct()
-    } as ReturnType<F> & contractsWithConnect;
-};
-
 export const initDeployOrAttach = (ethers: { getSigners(): Promise<SignerWithAddress[]> }) => {
     const attachOnly = <F extends ContractFactory>(
         FactoryConstructor: FactoryConstructor<F>,

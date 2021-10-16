@@ -7,7 +7,7 @@ import { Execution, ExecutionsFunctions } from './modules/execution';
 import { Migration } from './modules/migration';
 import { Network } from './modules/core/network';
 import { Paths } from './modules/core/paths';
-import { contractsWithConnect } from './contracts/deployOrAttach';
+import { contractsWithConnect } from './contracts/contracts';
 
 export class Engine {
     private signer: Signer;
