@@ -17,8 +17,8 @@
         "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
         "lint": "tslint --config tslint.json --project tsconfig.json",
         "build-for-test": "cd test/fixture-projects/hardhat-project && hardhat compile",
-        "clean": "cd test/fixture-projects/hardhat-project && rm -rf typechain cache artifacts",
-        "test": "yarn build-for-test && mocha --exit --recursive 'test/**/*.test.ts'",
+        "clean": "cd test/fixture-projects/hardhat-project && rm -rf typechain cache artifacts migration/data",
+        "test": "yarn build-for-test && mocha --exit --recursive 'test/**/*.test.ts' && yarn clean",
         "build": "tsc && cp -r src/examples/* dist/src/examples/ && cp -r src/tasks/* dist/src/tasks/",
         "watch": "tsc -w",
         "prepublishOnly": "npm run build"
@@ -32,6 +32,8 @@
     "devDependencies": {
         "@ethersproject/hardware-wallets": "^5.4.0",
         "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@openzeppelin/contracts": "^4.3.2",
+        "@openzeppelin/contracts-upgradeable": "^4.3.2",
         "@typechain/ethers-v5": "^7.1.2",
         "@typechain/hardhat": "^2.3.0",
         "@types/chai": "^4.1.7",
@@ -42,6 +44,7 @@
         "ethers": "^5.4.7",
         "fs-extra": "^10.0.0",
         "hardhat": "^2.0.0",
+        "hardhat-dependency-compiler": "^1.1.1",
         "import": "^0.0.6",
         "mocha": "^7.1.2",
         "prettier": "^2.4.1",

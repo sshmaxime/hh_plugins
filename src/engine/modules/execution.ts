@@ -120,16 +120,16 @@ export class Execution {
             return receipt;
         };
 
-        const deployProxy = async <F extends ContractFactory>(
+        const deployProxy = async <F extends ContractFactory, K extends ContractFactory>(
             admin: {
                 address: string;
             },
             proxyContractToDeploy: ContractBuilder<F>,
-            logicContractToDeploy: ContractBuilder<F>,
+            logicContractToDeploy: ContractBuilder<K>,
             initializeArgs: initializeArgs,
-            ctorArgs: Parameters<F['deploy']>,
+            ctorArgs: Parameters<K['deploy']>,
             skipInitialization?: boolean
-        ): Promise<proxy<F>> => {
+        ): Promise<proxy<K>> => {
             log.debug('Deploying proxy');
 
             const logicContract = await this.functions.deploy(logicContractToDeploy, ...ctorArgs);

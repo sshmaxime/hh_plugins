@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
-import { engine } from '../../../../engine/bootloader';
-import { IMigration } from '../../../../engine/types/types';
+import { engine } from '../../../../../src/engine/bootloader';
+import { IMigration, deployedContract } from '../../../../../src/engine/types/types';
 import Contracts from '../../contracts';
 
 const {
@@ -11,13 +11,17 @@ const {
 
 export type InitialState = unknown;
 
-export type NextState = InitialState & {};
+export type NextState = InitialState & {
+    myContract: deployedContract;
+};
 
 const migration: IMigration = {
     up: async (initialState: InitialState): Promise<NextState> => {
-        await deploy(contracts.myContract);
+        const myContract = await deploy(contracts.myContract);
 
-        return {};
+        return {
+            myContract: myContract.address
+        };
     },
 
     healthCheck: async (initialState: InitialState, state: NextState) => {},
