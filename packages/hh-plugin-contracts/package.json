@@ -1,6 +1,6 @@
 {
   "name": "hh-plugin-contracts",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "repository": "git@github.com:sshmaxime/hh-plugin-contracts.git",
   "author": "Maxime Aubanel <maximeauba@gmail.com>",
   "license": "MIT",
