@@ -1,10 +1,11 @@
 {
   "name": "hh-plugin-contracts",
-  "version": "1.0.1",
-  "main": "index.js",
+  "version": "1.0.2",
   "repository": "git@github.com:sshmaxime/hh-plugin-contracts.git",
   "author": "Maxime Aubanel <maximeauba@gmail.com>",
   "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "ethers": "^5.4.7"
   },
