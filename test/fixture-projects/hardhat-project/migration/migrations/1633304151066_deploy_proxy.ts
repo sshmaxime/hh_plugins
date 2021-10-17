@@ -37,7 +37,7 @@ const migration: IMigration = {
 
     healthCheck: async (initialState: InitialState, state: NextState) => {
         const myUpgradeableContract = await contracts.myUpgradeableContract.attach(state.myUpgradeableContract);
-        if ((await myUpgradeableContract.returnMeSomething()) != 'alpha') {
+        if ((await myUpgradeableContract.returnMeSomething()) !== 'alpha') {
             throw new Error("didn't return alpha");
         }
     },

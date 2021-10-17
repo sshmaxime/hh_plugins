@@ -30,7 +30,7 @@ const migration: IMigration = {
 
     healthCheck: async (initialState: InitialState, state: NextState) => {
         const myUpgradeableContract = await contracts.myUpgradeableContract.attach(state.myUpgradeableContract);
-        if ((await myUpgradeableContract.returnMeSomething()) != 'beta') {
+        if ((await myUpgradeableContract.returnMeSomething()) !== 'beta') {
             throw new Error("didn't return beta");
         }
     },
