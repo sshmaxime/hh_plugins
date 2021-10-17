@@ -1,6 +1,6 @@
 import { defaultMigrationArgs, ExecutionSettings, NetworkSettings } from '../types/types';
 import { parseUnits } from '@ethersproject/units';
-import { ContractBuilder, Contract } from '../contracts/contractBuilder';
+import { ContractBuilder, Contract } from 'hh-plugin-contracts';
 import { ContractFactory, ContractReceipt, ContractTransaction, Overrides } from 'ethers';
 import log from '../utils/logger';
 import { Network } from './core/network';

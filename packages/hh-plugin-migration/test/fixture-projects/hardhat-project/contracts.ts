@@ -1,7 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer';
 import { ethers } from 'hardhat';
-import { initDeployOrAttach } from '../../../src/engine/contracts/deployOrAttach';
-import { buildContracts } from '../../../src/engine/contracts/contracts';
+import { initDeployOrAttach, buildContracts } from 'hh-plugin-contracts';
 import { MyContract__factory } from './typechain';
 import { ProxyAdmin__factory } from './typechain/factories/ProxyAdmin__factory';
 import { TransparentUpgradeableProxy__factory } from './typechain/factories/TransparentUpgradeableProxy__factory';

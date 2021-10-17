@@ -7,7 +7,7 @@ import { Execution, ExecutionsFunctions } from './modules/execution';
 import { Migration } from './modules/migration';
 import { Network } from './modules/core/network';
 import { Paths } from './modules/core/paths';
-import { contractsWithConnect } from './contracts/contracts';
+import { outputContracts } from 'hh-plugin-contracts';
 
 export class Engine {
     private signer: Signer;
@@ -62,7 +62,7 @@ export class Engine {
         };
     };
 
-    get<F extends contractsWithConnect>(
+    get<F extends outputContracts>(
         Contracts: F
     ): {
         signer: Signer;
@@ -76,7 +76,7 @@ export class Engine {
         functions: ExecutionsFunctions;
     };
 
-    get<F extends contractsWithConnect>(Contracts?: F) {
+    get<F extends outputContracts>(Contracts?: F) {
         if (Contracts) {
             const contracts = Contracts.connect(this.signer) as F;
 
