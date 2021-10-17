@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
-import { engine } from '../../../../../src/engine/bootloader';
-import { IMigration } from '../../../../../src/engine/types/types';
+import { engine } from '../../../../engine/bootloader';
+import { IMigration } from '../../../../engine/types/types';
 import Contracts from '../../contracts';
 
 const {
