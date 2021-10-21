@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: packages/
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install NPM Dependencies
+        run: yarn install
+
+      # - name: Test hh-plugin-contracts
+      #   run: cd hh-plugin-contracts && yarn test
+
+      - name: Test hh-plugin-migration
+        run: cd hh-plugin-migration && yarn test
