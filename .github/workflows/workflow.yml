@@ -24,8 +24,8 @@ jobs:
       - name: Install NPM Dependencies
         run: yarn install
 
-      # - name: Test hh-plugin-contracts
+      # - name: Test - Plugin Contracts
       #   run: cd hh-plugin-contracts && yarn test
 
-      - name: Test hh-plugin-migration
+      - name: Test - Plugin Migration
         run: cd hh-plugin-migration && yarn test
