@@ -21,11 +21,14 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Install NPM Dependencies
-        run: yarn install
+      - name: hh-plugin-migration
+        working-directory: hh-plugin-migration/
+        run: |
+          yarn install
+          yarn test
 
-      # - name: Test - Plugin Contracts
-      #   run: cd hh-plugin-contracts && yarn test
-
-      - name: Test - Plugin Migration
-        run: cd hh-plugin-migration && yarn test
+      # - name: hh-plugin-contracts
+      #   working-directory: hh-plugin-contracts/
+      #   run: |
+      #     yarn install
+      #     yarn test
