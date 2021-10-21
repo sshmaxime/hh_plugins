@@ -10,10 +10,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        shell: bash
-        working-directory: packages/
 
     steps:
       - uses: actions/checkout@v2
@@ -21,13 +17,13 @@ jobs:
         with:
           node-version: "16"
 
-      - name: hh-plugin-migration
-        working-directory: hh-plugin-migration/
+      - name: Test hh-plugin-migration
+        working-directory: packages/hh-plugin-migration
         run: |
           yarn install
           yarn test
 
-      # - name: hh-plugin-contracts
+      # - name: Test hh-plugin-contracts
       #   working-directory: hh-plugin-contracts/
       #   run: |
       #     yarn install
