@@ -1,6 +1,6 @@
 {
     "name": "hardhat-migration",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Hardhat TypeScript plugin for migration",
     "repository": "github:sshmaxime/hardhat-migration",
     "author": "Maxime Aubanel",
@@ -18,7 +18,7 @@
         "lint": "tslint --config tslint.json --project tsconfig.json",
         "build-for-test": "cd test/fixture-projects/hardhat-project && hardhat compile",
         "clean": "cd test/fixture-projects/hardhat-project && rm -rf typechain cache artifacts migration/data",
-        "test": "yarn build-for-test && mocha --exit --recursive 'test/**/*.test.ts' && yarn clean",
+        "test": "yarn build-for-test && mocha --exit --recursive 'test/**/*.test.ts'",
         "build": "tsc && cp -r src/examples/* dist/src/examples/ && cp -r src/tasks/* dist/src/tasks/",
         "watch": "tsc -w",
         "prepublishOnly": "npm run build"

@@ -12,6 +12,6 @@
         "useUnknownInCatchVariables": false,
         "noImplicitAny": false
     },
-    "include": ["./test", "./src"],
-    "exclude": ["dist", "node_modules", "./src/examples/"]
+    "include": ["./src"],
+    "exclude": ["dist", "node_modules", "./src/examples/", "./test"]
 }
