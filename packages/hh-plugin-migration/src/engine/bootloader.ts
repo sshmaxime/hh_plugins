@@ -13,6 +13,6 @@ export default async (args: defaultMigrationArgs, hre: hre, task: (a: any, b: hr
 
     engine = new Engine(hre.config.migration, { signer, address }, hre.config.paths.root, hre.network.name, args);
 
-    // go to actual task
+    // go to the actual task
     await task(args, hre);
 };
