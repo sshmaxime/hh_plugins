@@ -1,4 +1,4 @@
-import { MigrationConfig } from '../../../type-extensions';
+import { MigrationConfig } from '../../../types';
 import { MIGRATION_DATA_DIR, MIGRATION_DEPLOYMENTS_DIR, MIGRATION_FILES_DIR } from '../../utils/constants';
 import path from 'path';
 

@@ -2,7 +2,6 @@
 import { HardhatUserConfig } from 'hardhat/types';
 
 import '../../../src/index';
-import 'hardhat-dependency-compiler';
 import '@typechain/hardhat';
 
 const config: HardhatUserConfig = {
@@ -34,17 +33,7 @@ const config: HardhatUserConfig = {
                 count: 10,
                 accountsBalance: '10000000000000000000000000000'
             }
-        },
-        mainnet: {
-            url: ''
         }
-    },
-
-    dependencyCompiler: {
-        paths: [
-            '@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol',
-            '@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol'
-        ]
     }
 };
 

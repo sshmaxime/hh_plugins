@@ -1,4 +1,4 @@
-import { MigrationConfig } from '../../../type-extensions';
+import { MigrationConfig } from '../../../types';
 
 export class Network {
     networkName: string;

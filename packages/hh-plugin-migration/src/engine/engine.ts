@@ -1,6 +1,6 @@
 import { defaultMigrationArgs } from './types/types';
 import { Signer } from 'ethers';
-import { MigrationConfig } from '../type-extensions';
+import { MigrationConfig } from '../types';
 import log from './utils/logger';
 import { Io } from './modules/core/io';
 import { Execution, ExecutionsFunctions } from './modules/execution';

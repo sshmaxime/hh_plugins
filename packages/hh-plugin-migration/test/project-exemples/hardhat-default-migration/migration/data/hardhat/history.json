@@ -1,0 +1,12 @@
+{
+    "0_deploy_myContract.ts": {
+        "executions": [
+            {
+                "type": "DEPLOY",
+                "params": [],
+                "description": "MyContract",
+                "tx": "0x47489c286341ae26c2e1b87f378d8c20b9f6f0af0b812a57c01f6821baaa1016"
+            }
+        ]
+    }
+}

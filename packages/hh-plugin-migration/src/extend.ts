@@ -1,10 +1,8 @@
 import { extendConfig } from 'hardhat/config';
 import { HardhatConfig, HardhatUserConfig, HttpNetworkConfig, NetworksUserConfig } from 'hardhat/types';
 import { resolveConfig } from 'hardhat/internal/core/config/config-resolution';
-import { ForkNetworkConfig } from './type-extensions';
-
-export const FORK_PREFIX = 'fork-';
-export const DEFAULT_MIGRATION_DIR = 'migration';
+import { ForkNetworkConfig } from './types';
+import { DEFAULT_MIGRATION_DIR, FORK_PREFIX } from './constants';
 
 const loadMigrationForkedNetworkConfig = (
     networkToFork: string,
