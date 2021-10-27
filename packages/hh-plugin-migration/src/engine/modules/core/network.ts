@@ -1,4 +1,4 @@
-import { MigrationConfig } from "../../../type-extensions";
+import { MigrationConfig } from '../../../type-extensions';
 
 export class Network {
     networkName: string;
@@ -6,11 +6,10 @@ export class Network {
     originalNetwork: string;
 
     constructor(migrationConfig: MigrationConfig, hreNetworkName: string) {
-        const forkConfig = migrationConfig.forkConfig;
+        const forkConfig = migrationConfig.forkNetworkConfig;
 
         this.networkName = forkConfig?.networkName || hreNetworkName;
-        this.originalNetwork =
-            forkConfig?.originalNetworkName || hreNetworkName;
-        this.isFork = forkConfig?.isFork || false;
+        this.originalNetwork = forkConfig?.originalNetworkName || hreNetworkName;
+        this.isFork = forkConfig !== undefined;
     }
 }

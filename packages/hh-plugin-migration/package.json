@@ -1,9 +1,9 @@
 {
     "name": "hardhat-migration",
     "version": "1.0.2",
-    "description": "Hardhat TypeScript plugin for migration",
-    "repository": "github:sshmaxime/hardhat-migration",
+    "repository": "git@github.com:sshmaxime/hh_plugins.git",
     "author": "Maxime Aubanel",
+    "description": "Hardhat TypeScript plugin for migration",
     "license": "MIT",
     "main": "dist/src/index.js",
     "types": "dist/src/index.d.ts",
@@ -16,9 +16,8 @@
     "scripts": {
         "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
         "lint": "tslint --config tslint.json --project tsconfig.json",
-        "build-for-test": "cd test/fixture-projects/hardhat-project && hardhat compile",
-        "clean": "cd test/fixture-projects/hardhat-project && rm -rf typechain cache artifacts migration/data",
-        "test": "yarn build-for-test && mocha --exit --recursive 'test/**/*.test.ts'",
+        "build-for-test": "for d in ./test/project-exemples/*/ ; do (cd \"$d\" && hardhat compile); done",
+        "test": "yarn build-for-test && mocha --exit --recursive 'test/*.test.ts'",
         "build": "tsc && cp -r src/examples/* dist/src/examples/ && cp -r src/tasks/* dist/src/tasks/",
         "watch": "tsc -w",
         "prepublishOnly": "npm run build"
@@ -45,7 +44,7 @@
         "fs-extra": "^10.0.0",
         "hardhat": "^2.0.0",
         "hardhat-dependency-compiler": "^1.1.1",
-        "hh-plugin-contracts": "^2.0.0",
+        "hh-plugin-contracts": "^2.0.1",
         "import": "^0.0.6",
         "mocha": "^7.1.2",
         "prettier": "^2.4.1",

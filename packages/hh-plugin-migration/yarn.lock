@@ -1944,10 +1944,10 @@ he@1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-hh-plugin-contracts@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/hh-plugin-contracts/-/hh-plugin-contracts-2.0.0.tgz#8ffe95f16f338c85d832de583285ed3878087ee3"
-  integrity sha512-qsif+zb7U3mXayrwfmQOH7DCkU4ITC4QiCaWHN/1R9P4O4+EqtPSq7OffhoHhwB4WcV5nrWAxPSnP/+zv5Uj+A==
+hh-plugin-contracts@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/hh-plugin-contracts/-/hh-plugin-contracts-2.0.1.tgz#4ed4c225a4237836830668d359efe7f103678254"
+  integrity sha512-LOX8d0IhyjJq3RQCwaj0ppnwQupcxypsEbLNVV4JSqtwIlKhdT0Xk/dISXq0U7MEK2euCCn4XYIK9phj2xTguQ==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"

@@ -5,7 +5,12 @@ import '@nomiclabs/hardhat-ethers';
 // To extend one of Hardhat's types, you need to import the module where it has been defined, and redeclare it.
 import 'hardhat/types/config';
 import 'hardhat/types/runtime';
-import { ForkMigrationNetworkConfig } from './extend.setup';
+
+export type ForkNetworkConfig = {
+    url: string;
+    networkName: string;
+    originalNetworkName: string;
+};
 
 export interface MigrationUserConfig {
     dir?: string;
@@ -13,7 +18,7 @@ export interface MigrationUserConfig {
 
 export interface MigrationConfig {
     dir: string;
-    forkConfig: ForkMigrationNetworkConfig;
+    forkNetworkConfig?: ForkNetworkConfig;
 }
 
 declare module 'hardhat/types/config' {
